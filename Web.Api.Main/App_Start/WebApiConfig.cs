@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Unity;
 using Unity.Injection;
 using Unity.WebApi;
@@ -20,11 +21,13 @@ namespace Web.Api.Main
     {
         public static void Register(HttpConfiguration config)
         {
-            var container = new UnityContainer();
+            // povolit cors
+            var cors = new EnableCorsAttribute("https://thomaash.github.io", "*", "*");
+            config.EnableCors(cors);
 
+            var container = new UnityContainer();
             // Database
             container.RegisterType<DbContext, ENVCtx>();
-            //container.Register<DbContext>(new InjectionFactory(c => new ENVCtx()));
             // AuthService
             container.RegisterType<IAuth, AuthenticationService>();
             // Repositories
