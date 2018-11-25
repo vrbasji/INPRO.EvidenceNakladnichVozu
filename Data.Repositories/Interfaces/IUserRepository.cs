@@ -14,7 +14,7 @@ namespace Data.Repositories.Interfaces
 
         bool ChangeUserRole(int userId, Role newRole);
 
-        bool AddUser(User user);
+        int AddUser(User user);
 
         User EditUser(User user);
 

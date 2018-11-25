@@ -16,12 +16,14 @@ namespace Data.Repositories.Interfaces
 
         bool ExcludeCar(int carId);
 
-        bool AddCar(Car car);
+        int AddCar(Car car);
 
         Car EditCar(Car car);
 
         Car DeleteCar(int carId);
 
         List<Car> GetForPages(int start, int end);
+
+        Fault AddFaultToCar(Fault fault, int carId);
     }
 }

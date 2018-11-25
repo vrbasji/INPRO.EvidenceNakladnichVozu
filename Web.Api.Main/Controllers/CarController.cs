@@ -34,7 +34,7 @@ namespace Web.Api.Main.Controllers
 
         [HttpPost]
         [Route("api/car")]
-        public bool AddCar([FromBody]Car car)
+        public int AddCar([FromBody]Car car)
         {
             return _carRepository.AddCar(car);
         }

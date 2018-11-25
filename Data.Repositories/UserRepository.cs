@@ -17,16 +17,20 @@ namespace Data.Repositories
             _dbContext = dbContext;
         }
 
-        public bool AddUser(User user)
+        public int AddUser(User user)
         {
             try
             {
+                var role = _dbContext.Roles.FirstOrDefault(x => x.RoleId == user.Role.RoleId);
+                if (role == null) return -1;
+                user.Role = role;
                 _dbContext.Users.Add(user);
-                return _dbContext.SaveChanges() == 1;
+                _dbContext.SaveChanges();
+                return user.UserId;
             }
             catch (Exception)
             {
-                return false;
+                return -1;
             }
         }
 
@@ -62,7 +66,9 @@ namespace Data.Repositories
                 ed.Email = user.Email;
                 ed.FirstName = user.FirstName;
                 ed.LastName = user.LastName;
-                ed.Role = user.Role;
+                var role = _dbContext.Roles.FirstOrDefault(x => x.RoleId == user.Role.RoleId);
+                if (role == null) role = user.Role;
+                ed.Role = role;
                 _dbContext.SaveChanges();
             }
             return ed;

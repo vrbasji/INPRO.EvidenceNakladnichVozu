@@ -41,7 +41,7 @@ namespace Web.Api.Main.Controllers
 
         [HttpPost]
         [Route("api/user")]
-        public bool AddUser([FromBody]User user)
+        public int AddUser([FromBody]User user)
         {
             return _userRepository.AddUser(user);
         }

@@ -15,17 +15,37 @@ namespace Data.Repositories
             _dbContext = dbContext;
         }
 
-        public bool AddCar(Car car)
+        public int AddCar(Car car)
         {
             try
             {
+                var serie = _dbContext.Series.FirstOrDefault(x => x.SerieId == car.Serie.SerieId);
+                if (serie == null) serie = car.Serie;
+                car.Serie = serie;
+                var owner = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == car.Owner.SubjectId);
+                if (owner == null) owner = car.Owner;
+                car.Owner = owner;
+                var resp = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == car.ServiceResponsiblePerson.SubjectId);
+                if (resp == null) resp = car.ServiceResponsiblePerson;
+                car.ServiceResponsiblePerson = resp;
                 _dbContext.Cars.Add(car);
-                return _dbContext.SaveChanges() == 1;
+                _dbContext.SaveChanges();
+
+                return car.CarId;
             }
             catch (Exception)
             {
-                return false;
+                return -1;
             }
+        }
+
+        public Fault AddFaultToCar(Fault fault, int carId)
+        {
+            var car = GetById(carId);
+            if (car == null) return null;
+            car.Faults.Add(fault);
+            _dbContext.SaveChanges();
+            return fault;
         }
 
         public Car DeleteCar(int carId)
