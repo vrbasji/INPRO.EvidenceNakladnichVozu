@@ -19,40 +19,37 @@ namespace Web.Api.Main.Controllers
             _carRepository = carRepository;
         }
 
-        [SwaggerOperation("GetCarServiceHistory")]
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
-        public List<Revision> GetCarServiceHistory(int id)
+        [HttpGet]
+        [Route("api/car/{startId}/{endId}")]
+        public IEnumerable<Car> GetAllPages(int startId, int endId)
         {
-            return _carRepository.GetCarRevision(id);
+            return _carRepository.GetForPages(startId, endId);
+        }
+        [HttpGet]
+        [Route("api/car/{id}")]
+        public Car GetCar(int id)
+        {
+            return _carRepository.GetById(id);
         }
 
-        [SwaggerOperation("GetAllCars")]
-        public List<Car> GetAllCars()
-        {
-            return _carRepository.GetAll();
-        }
-
-        [SwaggerOperation("ArchiveCar")]
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
-        public bool ArchiveCar([FromBody]Car car)
-        {
-            return _carRepository.ExcludeCar(car.CarId);
-        }
-
-        [SwaggerOperation("AddCar")]
-        [SwaggerResponse(HttpStatusCode.Created)]
+        [HttpPost]
+        [Route("api/car")]
         public bool AddCar([FromBody]Car car)
         {
             return _carRepository.AddCar(car);
         }
-        [SwaggerOperation("GetCarState")]
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
-        public Car GetCarState(int id)
+
+        [HttpPut]
+        [Route("api/car")]
+        public Car EditCar([FromBody]Car car)
         {
-            return _carRepository.GetById(id);
+            return _carRepository.EditCar(car);
+        }
+        [HttpDelete]
+        [Route("api/car/{id}")]
+        public Car DeleteCar(int id)
+        {
+            return _carRepository.DeleteCar(id);
         }
     }
 }

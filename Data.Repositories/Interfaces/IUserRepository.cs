@@ -15,5 +15,11 @@ namespace Data.Repositories.Interfaces
         bool ChangeUserRole(int userId, Role newRole);
 
         bool AddUser(User user);
+
+        User EditUser(User user);
+
+        User DeleteUser(int userId);
+
+        List<User> GetForPages(int start, int end);
     }
 }

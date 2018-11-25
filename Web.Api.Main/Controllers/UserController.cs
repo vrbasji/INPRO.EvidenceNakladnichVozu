@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Http;
 using Web.Api.Main.Servicies;
 
 namespace Web.Api.Main.Controllers
@@ -19,27 +20,43 @@ namespace Web.Api.Main.Controllers
         {
             _userRepository = userRepository;
         }
-
-        [SwaggerOperation("GetAllUsers")]
+        [HttpGet]
+        [Route("api/user")]
         public IEnumerable<User> GetAllUsers()
         {
             return _userRepository.GetAll();
         }
-        [SwaggerOperation("GetUserInfo")]
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [HttpGet]
+        [Route("api/user/{startId}/{endId}")]
+        public IEnumerable<User> GetAllPages(int startId, int endId)
+        {
+            return _userRepository.GetForPages(startId,endId);
+        }
+        [HttpGet]
+        [Route("api/user/{id}")]
         public User GetUserInfo(int id)
         {
             return _userRepository.GetUser(id);
         }
 
-        [SwaggerOperation("GetLogedUserInfo")]
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
-        public User GetLogedUserInfo()
+        [HttpPost]
+        [Route("api/user")]
+        public bool AddUser([FromBody]User user)
         {
-            var id = 5;//TODO: get logged user, nebo to spojit s jen GetUserInfo, at si to poresi na frontendu
-            return _userRepository.GetUser(id);
+            return _userRepository.AddUser(user);
+        }
+
+        [HttpPut]
+        [Route("api/user")]
+        public User EditUser([FromBody]User user)
+        {
+            return _userRepository.EditUser(user);
+        }
+        [HttpDelete]
+        [Route("api/user/{id}")]
+        public User DeleteUser(int id)
+        {
+            return _userRepository.DeleteUser(id);
         }
     }
 }
