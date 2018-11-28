@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -13,7 +14,7 @@ namespace Data
         public int CarId { get; set; }
         public string Name { get; set; }
         public DateTime LastRevision { get; set; }
-        public TimeSpan RevisionPeriod { get; set; }
+        public int RevisionPeriod { get; set; }
         public DateTime LastZTE { get; set; }
         public DateTime LastZTL { get; set; }
         public bool Certification { get; set; }

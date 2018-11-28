@@ -21,7 +21,7 @@ namespace Web.Api.Main.Controllers
 
         [SwaggerOperation("AddUser")]
         [SwaggerResponse(HttpStatusCode.Created)]
-        public bool AddUser([FromBody]User user)
+        public int AddUser([FromBody]User user)
         {
             return _userRepository.AddUser(user);
         }

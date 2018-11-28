@@ -66,7 +66,7 @@ namespace Data.Database.Insertion
                 LastZTE = RandomDay(),
                 LastZTL = RandomDay(),
                 Name = "Nazev vozu " + nameCounter++,
-                RevisionPeriod = GenRevPeriod(),
+                RevisionPeriod = 30,
                 State = GenState(),
             };
             car.ChangeHistories = GenHistories(rnd.Next(5, 10), car);
@@ -232,7 +232,7 @@ namespace Data.Database.Insertion
 
         public static TimeSpan GenRevPeriod()
         {
-            return new TimeSpan(0, 0, 0, new Random().Next(86400));
+            return TimeSpan.FromSeconds((double)new Random().Next(10,50));
         }
     }
 }

@@ -70,12 +70,20 @@ namespace Data.Repositories
                 ed.LastZTE = car.LastZTE;
                 ed.LastZTL = car.LastZTL;
                 ed.Name = car.Name;
-                ed.Owner = car.Owner;
                 ed.RevisionPeriod = car.RevisionPeriod;
                 ed.Revisions = car.Revisions;
-                ed.Serie = car.Serie;
-                ed.ServiceResponsiblePerson = car.ServiceResponsiblePerson;
                 ed.State = car.State;
+
+                var serie = _dbContext.Series.FirstOrDefault(x => x.SerieId == car.Serie.SerieId);
+                if (serie == null) serie = car.Serie;
+                ed.Serie = serie;
+                var owner = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == car.Owner.SubjectId);
+                if (owner == null) owner = car.Owner;
+                ed.Owner = owner;
+                var resp = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == car.ServiceResponsiblePerson.SubjectId);
+                if (resp == null) resp = car.ServiceResponsiblePerson;
+                ed.ServiceResponsiblePerson = resp;
+
                 _dbContext.SaveChanges();
             }
             return ed;
