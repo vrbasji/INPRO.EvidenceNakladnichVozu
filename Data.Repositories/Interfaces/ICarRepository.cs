@@ -14,7 +14,7 @@ namespace Data.Repositories.Interfaces
 
         List<Revision> GetCarRevision(int carId);
 
-        List<Serie> GetAllSeries();
+        List<Serie> GetAllSeries(int startId, int endId);
 
         bool ExcludeCar(int carId);
 

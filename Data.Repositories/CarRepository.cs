@@ -108,9 +108,9 @@ namespace Data.Repositories
             return _dbContext.Cars.ToList();
         }
 
-        public List<Serie> GetAllSeries()
+        public List<Serie> GetAllSeries(int start, int end)
         {
-            return _dbContext.Series.ToList();
+            return _dbContext.Series.Skip(start).Take(end).ToList();
         }
 
         public Car GetById(int carId)

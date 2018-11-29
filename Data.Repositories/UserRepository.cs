@@ -74,9 +74,9 @@ namespace Data.Repositories
             return ed;
         }
 
-        public List<Subject> GetAllSubjects()
+        public List<Subject> GetAllSubjects(int start, int end)
         {
-            return _dbContext.Subjects.ToList();
+            return _dbContext.Subjects.Skip(start).Take(end).ToList();
         }
 
         public List<User> GetForPages(int start, int end)

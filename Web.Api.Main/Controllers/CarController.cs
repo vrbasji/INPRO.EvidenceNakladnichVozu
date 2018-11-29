@@ -32,10 +32,10 @@ namespace Web.Api.Main.Controllers
             return _carRepository.GetById(id);
         }
         [HttpGet]
-        [Route("api/serie")]
-        public List<Serie> GetSeries()
+        [Route("api/serie/{startId}/{endId}")]
+        public List<Serie> GetSeries(int startId, int endId)
         {
-            return _carRepository.GetAllSeries();
+            return _carRepository.GetAllSeries(startId, endId);
         }
 
         [HttpPost]
