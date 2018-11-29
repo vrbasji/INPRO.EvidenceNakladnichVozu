@@ -52,7 +52,7 @@ namespace Data.Repositories
         {
             var car = _dbContext.Cars.FirstOrDefault(x => x.CarId == carId);
             if (car == null) return null;
-            _dbContext.Cars.Remove(car);
+            car.State = State.Excluded;
             _dbContext.SaveChanges();
             return car;
         }
@@ -106,6 +106,11 @@ namespace Data.Repositories
         public List<Car> GetAll()
         {
             return _dbContext.Cars.ToList();
+        }
+
+        public List<Serie> GetAllSeries()
+        {
+            return _dbContext.Series.ToList();
         }
 
         public Car GetById(int carId)

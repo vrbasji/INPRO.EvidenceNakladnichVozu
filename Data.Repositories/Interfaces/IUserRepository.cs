@@ -8,7 +8,7 @@ namespace Data.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        List<User> GetAll();
+        List<Subject> GetAllSubjects();
 
         User GetUser(int userId);
 

@@ -21,10 +21,10 @@ namespace Web.Api.Main.Controllers
             _userRepository = userRepository;
         }
         [HttpGet]
-        [Route("api/user")]
-        public IEnumerable<User> GetAllUsers()
+        [Route("api/subjects")]
+        public IEnumerable<Subject> GetAllSubjects()
         {
-            return _userRepository.GetAll();
+            return _userRepository.GetAllSubjects();
         }
         [HttpGet]
         [Route("api/user/{startId}/{endId}")]

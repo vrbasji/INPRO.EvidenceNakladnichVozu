@@ -74,14 +74,14 @@ namespace Data.Repositories
             return ed;
         }
 
-        public List<User> GetAll()
+        public List<Subject> GetAllSubjects()
         {
-            return _dbContext.Users.ToList();
+            return _dbContext.Subjects.ToList();
         }
 
         public List<User> GetForPages(int start, int end)
         {
-            return GetAll().Skip(start).Take(end).ToList();
+            return _dbContext.Users.Skip(start).Take(end).ToList();
         }
 
         public User GetUser(int userId)

@@ -31,6 +31,12 @@ namespace Web.Api.Main.Controllers
         {
             return _carRepository.GetById(id);
         }
+        [HttpGet]
+        [Route("api/serie")]
+        public List<Serie> GetSeries()
+        {
+            return _carRepository.GetAllSeries();
+        }
 
         [HttpPost]
         [Route("api/car")]
