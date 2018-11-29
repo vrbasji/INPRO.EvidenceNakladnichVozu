@@ -28,6 +28,7 @@ namespace Data.Repositories
                 var resp = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == car.ServiceResponsiblePerson.SubjectId);
                 if (resp == null) resp = car.ServiceResponsiblePerson;
                 car.ServiceResponsiblePerson = resp;
+                car.State = State.New;
                 _dbContext.Cars.Add(car);
                 _dbContext.SaveChanges();
 
@@ -110,7 +111,7 @@ namespace Data.Repositories
 
         public List<Serie> GetAllSeries(int start, int end)
         {
-            return _dbContext.Series.Skip(start).Take(end).ToList();
+            return _dbContext.Series.OrderBy(x=>x.SerieId).Skip(start).Take(end).ToList();
         }
 
         public Car GetById(int carId)

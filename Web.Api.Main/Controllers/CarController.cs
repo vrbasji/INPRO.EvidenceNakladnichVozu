@@ -38,6 +38,13 @@ namespace Web.Api.Main.Controllers
             return _carRepository.GetAllSeries(startId, endId);
         }
 
+        [HttpGet]
+        [Route("api/servicehistory/{carId}")]
+        public List<Revision> GetCarServiceHistory(int carId)
+        {
+            return _carRepository.GetCarRevision(carId);
+        }
+
         [HttpPost]
         [Route("api/car")]
         public int AddCar([FromBody]Car car)
