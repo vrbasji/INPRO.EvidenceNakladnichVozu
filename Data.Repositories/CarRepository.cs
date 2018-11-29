@@ -106,7 +106,7 @@ namespace Data.Repositories
 
         public List<Car> GetAll()
         {
-            return _dbContext.Cars.ToList();
+            return _dbContext.Cars.Where(x=>x.State == State.New).ToList();
         }
 
         public List<Serie> GetAllSeries(int start, int end)

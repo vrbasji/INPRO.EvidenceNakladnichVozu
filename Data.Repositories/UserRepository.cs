@@ -81,7 +81,7 @@ namespace Data.Repositories
 
         public List<User> GetForPages(int start, int end)
         {
-            return _dbContext.Users.Skip(start).Take(end).ToList();
+            return _dbContext.Users.OrderBy(x=>x.UserId).Skip(start).Take(end).ToList();
         }
 
         public User GetUser(int userId)
