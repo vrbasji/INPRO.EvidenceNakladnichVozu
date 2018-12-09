@@ -1,18 +1,13 @@
 ﻿using Data;
 using Data.Repositories.Interfaces;
-using Newtonsoft.Json;
-using Swashbuckle.Swagger.Annotations;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Http;
 using Web.Api.Main.Servicies;
 
 namespace Web.Api.Main.Controllers
 {
-    public class UserController : MyApiController
+    [RoutePrefix("api/user")]
+    public class UserController : MyApiController, IDefaultMethods<User>
     {
         private IUserRepository _userRepository;
 
@@ -20,43 +15,40 @@ namespace Web.Api.Main.Controllers
         {
             _userRepository = userRepository;
         }
-        [HttpGet]
-        [Route("api/subject/{startId}/{endId}")]
-        public IEnumerable<Subject> GetAllSubjects(int startId, int endId)
+        [Route]
+        public int Add(User data)
         {
-            return _userRepository.GetAllSubjects(startId, endId);
+            return _userRepository.AddUser(data);
         }
-        [HttpGet]
-        [Route("api/user/{startId}/{endId}")]
-        public IEnumerable<User> GetAllPages(int startId, int endId)
+        [Route]
+        [HttpPut]
+        public void Edit(User data)
         {
-            return _userRepository.GetForPages(startId,endId);
+            _userRepository.EditUser(data);
         }
-        [HttpGet]
-        [Route("api/user/{id}")]
-        public User GetUserInfo(int id)
+
+        [Route("{id}")]
+        public User Get(int id)
         {
             return _userRepository.GetUser(id);
         }
 
-        [HttpPost]
-        [Route("api/user")]
-        public int AddUser([FromBody]User user)
+        [Route("{id}")]
+        public void Delete(int id)
         {
-            return _userRepository.AddUser(user);
+            _userRepository.DeleteUser(id);
         }
 
-        [HttpPut]
-        [Route("api/user")]
-        public User EditUser([FromBody]User user)
+        [Route("{skip}/{count}")]
+        public List<User> Get(int skip, int count)
         {
-            return _userRepository.EditUser(user);
+            return _userRepository.GetForPages(skip, count);
         }
-        [HttpDelete]
-        [Route("api/user/{id}")]
-        public User DeleteUser(int id)
+
+        [Route("{query}")]
+        public List<User> Get(string query)
         {
-            return _userRepository.DeleteUser(id);
+            return _userRepository.FindUsers(query);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Metadata.Edm;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Data.Database
 {
-    public class ENVCtx : DbContext
+    public class ENVCtx : IdentityDbContext<IdentityUser>
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Car> Cars { get; set; }
@@ -20,6 +21,8 @@ namespace Data.Database
         public DbSet<Role> Roles { get; set; }
         public DbSet<Serie> Series { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<HandBreak> HandBreaks { get; set; }
+        public DbSet<AirBreak> AirBreaks { get; set; }
 
         public ENVCtx():base(nameOrConnectionString:"EvidenceNakladnichVozuConStr")
         {

@@ -27,5 +27,7 @@ namespace Data.Repositories.Interfaces
         List<Car> GetForPages(int start, int end);
 
         Fault AddFaultToCar(Fault fault, int carId);
+
+        List<Car> FindCars(string query);
     }
 }

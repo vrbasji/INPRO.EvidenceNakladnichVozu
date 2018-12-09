@@ -31,14 +31,26 @@ namespace Web.Api.Main
             // AuthService
             container.RegisterType<IAuth, AuthenticationService>();
             // Repositories
-            var context = new ResolvedParameter<ENVCtx>();
-            container.RegisterType<ICarRepository, CarRepository>(/*(new InjectionConstructor(context))*/);
-            container.RegisterType<IUserRepository, UserRepository>(/*(new InjectionConstructor(context))*/);
+            container.RegisterType<ICarRepository, CarRepository>();
+            container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterType<ISubjectRepository, SubjectRepository>();
+            container.RegisterType<ISerieRepository, SerieRepository>();
+            container.RegisterType<IBreakRepository, BreakRepository>();
+            container.RegisterType<CarHistoryService>();
+            container.RegisterType<ICarHistoryRepository, CarHistoryRepository>();
             // Controllers
             var auth = new ResolvedParameter<IAuth>();
             var userRepository = new ResolvedParameter<UserRepository>();
+            var carRepository = new ResolvedParameter<CarRepository>();
+            var serieRepository = new ResolvedParameter<SerieRepository>();
+            var subjectRepository = new ResolvedParameter<SubjectRepository>();
+            var breakRepository = new ResolvedParameter<BreakRepository>();
             container.RegisterType<MyApiController>(new InjectionConstructor(auth));
             container.RegisterType<UserController>(new InjectionConstructor(auth, userRepository));
+            container.RegisterType<CarController>(new InjectionConstructor(auth, carRepository));
+            container.RegisterType<SerieController>(new InjectionConstructor(auth, serieRepository));
+            container.RegisterType<SubjectController>(new InjectionConstructor(auth, subjectRepository));
+            container.RegisterType<BreakController>(new InjectionConstructor(auth, breakRepository));
 
             config.DependencyResolver = new UnityDependencyResolver(container);
 

@@ -1,68 +1,60 @@
 ﻿using Data;
 using Data.Repositories.Interfaces;
-using Swashbuckle.Swagger.Annotations;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Http;
+using Web.Api.Main.Services;
 using Web.Api.Main.Servicies;
 
 namespace Web.Api.Main.Controllers
 {
-    public class CarController : MyApiController
+    [RoutePrefix("api/car")]
+    public class CarController : MyApiController, IDefaultMethods<Car>
     {
         private ICarRepository _carRepository;
-        public CarController(IAuth auth, ICarRepository carRepository) : base(auth)
+        private ICarHistoryRepository _carHistoryRepository;
+        public CarController(IAuth auth, ICarRepository carRepository, ICarHistoryRepository carHistoryRepository) : base(auth)
         {
             _carRepository = carRepository;
+            _carHistoryRepository = carHistoryRepository;
+        }
+        [Route]
+        public int Add(Car data)
+        {
+            return _carRepository.AddCar(data);
+        }
+        [Route]
+        [HttpPut]
+        public void Edit(Car data)
+        {
+            _carRepository.EditCar(data);
         }
 
-        [HttpGet]
-        [Route("api/car/{startId}/{endId}")]
-        public IEnumerable<Car> GetAllPages(int startId, int endId)
-        {
-            return _carRepository.GetForPages(startId, endId);
-        }
-        [HttpGet]
-        [Route("api/car/{id}")]
-        public Car GetCar(int id)
+        [Route("{id}")]
+        public Car Get(int id)
         {
             return _carRepository.GetById(id);
         }
-        [HttpGet]
-        [Route("api/serie/{startId}/{endId}")]
-        public List<Serie> GetSeries(int startId, int endId)
+
+        [Route("{id}")]
+        public void Delete(int id)
         {
-            return _carRepository.GetAllSeries(startId, endId);
+            _carRepository.DeleteCar(id);
         }
 
-        [HttpGet]
-        [Route("api/servicehistory/{carId}")]
-        public List<Revision> GetCarServiceHistory(int carId)
+        [Route("{skip}/{count}")]
+        public List<Car> Get(int skip, int count)
         {
-            return _carRepository.GetCarRevision(carId);
+            return _carRepository.GetForPages(skip, count);
         }
-
-        [HttpPost]
-        [Route("api/car")]
-        public int AddCar([FromBody]Car car)
+        [Route("search/{query}")]
+        public List<Car> Get(string query)
         {
-            return _carRepository.AddCar(car);
+            return _carRepository.FindCars(query);
         }
-
-        [HttpPut]
-        [Route("api/car")]
-        public Car EditCar([FromBody]Car car)
+        [Route("{id}/history/{skip}/{count}")]
+        public List<ChangeHistory> GetHistory(int id, int skip, int count)
         {
-            return _carRepository.EditCar(car);
-        }
-        [HttpDelete]
-        [Route("api/car/{id}")]
-        public Car DeleteCar(int id)
-        {
-            return _carRepository.DeleteCar(id);
+            return _carHistoryRepository.GetChangeHistories(id, skip, count);
         }
     }
 }

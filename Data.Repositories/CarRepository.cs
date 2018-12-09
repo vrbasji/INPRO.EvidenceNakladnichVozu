@@ -9,25 +9,36 @@ namespace Data.Repositories
     public class CarRepository : ICarRepository
     {
         private ENVCtx _dbContext;
+        private CarHistoryService _historyService;
 
-        public CarRepository(ENVCtx dbContext)
+        public CarRepository(ENVCtx dbContext, CarHistoryService historyService)
         {
             _dbContext = dbContext;
+            _historyService = historyService;
         }
 
         public int AddCar(Car car)
         {
             try
             {
-                var serie = _dbContext.Series.FirstOrDefault(x => x.SerieId == car.Serie.SerieId);
-                if (serie == null) serie = car.Serie;
-                car.Serie = serie;
-                var owner = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == car.Owner.SubjectId);
-                if (owner == null) owner = car.Owner;
-                car.Owner = owner;
-                var resp = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == car.ServiceResponsiblePerson.SubjectId);
-                if (resp == null) resp = car.ServiceResponsiblePerson;
-                car.ServiceResponsiblePerson = resp;
+                if (car.Serie != null)
+                {
+                    var serie = _dbContext.Series.FirstOrDefault(x => x.SerieId == car.Serie.SerieId);
+                    if (serie == null) serie = car.Serie;
+                    car.Serie = serie;
+                }
+                if (car.Owner != null)
+                {
+                    var owner = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == car.Owner.SubjectId);
+                    if (owner == null) owner = car.Owner;
+                    car.Owner = owner;
+                }
+                if (car.ServiceResponsiblePerson != null)
+                {
+                    var resp = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == car.ServiceResponsiblePerson.SubjectId);
+                    if (resp == null) resp = car.ServiceResponsiblePerson;
+                    car.ServiceResponsiblePerson = resp;
+                }
                 car.State = State.New;
                 _dbContext.Cars.Add(car);
                 _dbContext.SaveChanges();
@@ -60,6 +71,7 @@ namespace Data.Repositories
 
         public Car EditCar(Car car)
         {
+            if (car == null) return null;
             var ed = _dbContext.Cars.FirstOrDefault(x => x.CarId == car.CarId);
             if (ed != null)
             {
@@ -75,16 +87,26 @@ namespace Data.Repositories
                 ed.Revisions = car.Revisions;
                 ed.State = car.State;
 
-                var serie = _dbContext.Series.FirstOrDefault(x => x.SerieId == car.Serie.SerieId);
-                if (serie == null) serie = car.Serie;
-                ed.Serie = serie;
-                var owner = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == car.Owner.SubjectId);
-                if (owner == null) owner = car.Owner;
-                ed.Owner = owner;
-                var resp = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == car.ServiceResponsiblePerson.SubjectId);
-                if (resp == null) resp = car.ServiceResponsiblePerson;
-                ed.ServiceResponsiblePerson = resp;
+                if (car.Serie != null)
+                {
+                    var serie = _dbContext.Series.FirstOrDefault(x => x.SerieId == car.Serie.SerieId);
+                    if (serie == null) serie = car.Serie;
+                    ed.Serie = serie;
+                }
+                if (car.Owner != null)
+                {
+                    var owner = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == car.Owner.SubjectId);
+                    if (owner == null) owner = car.Owner;
+                    ed.Owner = owner;
+                }
+                if(car.ServiceResponsiblePerson != null)
+                {
+                    var resp = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == car.ServiceResponsiblePerson.SubjectId);
+                    if (resp == null) resp = car.ServiceResponsiblePerson;
+                    ed.ServiceResponsiblePerson = resp;
+                }
 
+                _historyService.SaveHistory(car, ed);
                 _dbContext.SaveChanges();
             }
             return ed;
@@ -104,14 +126,28 @@ namespace Data.Repositories
             }
         }
 
+        public List<Car> FindCars(string query)
+        {
+            if (int.TryParse(query, out int result))
+            {
+                return _dbContext.Cars.Where(x => x.RevisionPeriod == result).ToList();
+            }
+            if (DateTime.TryParse(query, out DateTime resultDate))
+            {
+                return _dbContext.Cars.Where(x => x.LastRevision == resultDate || x.LastZTE == resultDate || x.LastZTL == resultDate).ToList();
+            }
+
+            return _dbContext.Cars.Where(x => x.Name.Contains(query)).ToList();
+        }
+
         public List<Car> GetAll()
         {
-            return _dbContext.Cars.Where(x=>x.State == State.New).ToList();
+            return _dbContext.Cars.Where(x => x.State == State.New).ToList();
         }
 
         public List<Serie> GetAllSeries(int start, int end)
         {
-            return _dbContext.Series.OrderBy(x=>x.SerieId).Skip(start).Take(end).ToList();
+            return _dbContext.Series.OrderBy(x => x.SerieId).Skip(start).Take(end).ToList();
         }
 
         public Car GetById(int carId)
@@ -121,14 +157,14 @@ namespace Data.Repositories
 
         public List<Revision> GetCarRevision(int carId)
         {
-                return _dbContext.Revisions
-                    .Where(x => x.Car.CarId == carId)
-                    .ToList();
+            return _dbContext.Revisions
+                .Where(x => x.Car.CarId == carId)
+                .ToList();
         }
 
         public List<Car> GetForPages(int start, int end)
         {
-            return GetAll().Skip(start).Take(end).ToList();
+            return GetAll().OrderBy(x => x.CarId).Skip(start).Take(end).ToList();
         }
     }
 }

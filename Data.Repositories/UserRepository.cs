@@ -3,8 +3,6 @@ using Data.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
@@ -34,34 +32,21 @@ namespace Data.Repositories
             }
         }
 
-        public bool ChangeUserRole(int userId, Role newRole)
-        {
-            try
-            {
-                var user = _dbContext.Users.First(x => x.UserId == userId);
-                var role = _dbContext.Roles.First(x => x.RoleId == newRole.RoleId);
-                user.Role = role;
-                return _dbContext.SaveChanges() == 1;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public User DeleteUser(int userId)
+        public void DeleteUser(int userId)
         {
             var user = _dbContext.Users.FirstOrDefault(x => x.UserId == userId);
-            if (user == null) return null;
+            if(user == null)
+                throw new Exception("User with id " + userId + " was not found.");
             _dbContext.Users.Remove(user);
             _dbContext.SaveChanges();
-            return user;
         }
 
-        public User EditUser(User user)
+        public void EditUser(User user)
         {
             var ed = _dbContext.Users.FirstOrDefault(x => x.UserId == user.UserId);
-            if(ed != null)
+            if (ed == null)
+                throw new Exception("User with id " + user.UserId + " was not found.");
+            if (ed != null)
             {
                 ed.Email = user.Email;
                 ed.FirstName = user.FirstName;
@@ -71,22 +56,28 @@ namespace Data.Repositories
                 ed.Role = role;
                 _dbContext.SaveChanges();
             }
-            return ed;
         }
 
-        public List<Subject> GetAllSubjects(int start, int end)
+        public List<User> FindUsers(string query)
         {
-            return _dbContext.Subjects.OrderBy(x=>x.SubjectId).Skip(start).Take(end).ToList();
+            return _dbContext.Users
+                .Where(x => x.FirstName.Contains(query) || x.LastName.Contains(query) || x.Email.Contains(query))
+                .ToList();
         }
 
-        public List<User> GetForPages(int start, int end)
+        public List<User> GetForPages(int skip, int count)
         {
-            return _dbContext.Users.OrderBy(x=>x.UserId).Skip(start).Take(end).ToList();
+            return _dbContext.Users
+                .OrderBy(x=>x.UserId)
+                .Skip(skip)
+                .Take(count)
+                .ToList();
         }
 
         public User GetUser(int userId)
         {
-            return _dbContext.Users.FirstOrDefault(x => x.UserId == userId);
+            return _dbContext.Users
+                .FirstOrDefault(x => x.UserId == userId);
         }
     }
 }
