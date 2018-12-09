@@ -45,9 +45,10 @@ namespace Web.Api.Main
             var serieRepository = new ResolvedParameter<SerieRepository>();
             var subjectRepository = new ResolvedParameter<SubjectRepository>();
             var breakRepository = new ResolvedParameter<BreakRepository>();
+            var carHistoryRepository = new ResolvedParameter<CarHistoryRepository>();
             container.RegisterType<MyApiController>(new InjectionConstructor(auth));
             container.RegisterType<UserController>(new InjectionConstructor(auth, userRepository));
-            container.RegisterType<CarController>(new InjectionConstructor(auth, carRepository));
+            container.RegisterType<CarController>(new InjectionConstructor(auth, carRepository, carHistoryRepository));
             container.RegisterType<SerieController>(new InjectionConstructor(auth, serieRepository));
             container.RegisterType<SubjectController>(new InjectionConstructor(auth, subjectRepository));
             container.RegisterType<BreakController>(new InjectionConstructor(auth, breakRepository));
