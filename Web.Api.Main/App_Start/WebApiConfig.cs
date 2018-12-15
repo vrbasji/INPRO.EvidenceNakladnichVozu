@@ -52,6 +52,7 @@ namespace Web.Api.Main
             container.RegisterType<SerieController>(new InjectionConstructor(auth, serieRepository));
             container.RegisterType<SubjectController>(new InjectionConstructor(auth, subjectRepository));
             container.RegisterType<HandBreakController>(new InjectionConstructor(auth, breakRepository));
+            container.RegisterType<AirBreakController>(new InjectionConstructor(auth, breakRepository));
 
             config.DependencyResolver = new UnityDependencyResolver(container);
 

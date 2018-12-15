@@ -1,7 +1,7 @@
 ﻿using Data;
 using Data.Repositories.Interfaces;
 using System.Collections.Generic;
-using System.Web.Mvc;
+using System.Web.Http;
 using Web.Api.Main.Servicies;
 
 namespace Web.Api.Main.Controllers
