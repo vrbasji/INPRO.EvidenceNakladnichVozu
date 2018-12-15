@@ -10,6 +10,7 @@ using Web.Api.Main.Servicies;
 
 namespace Web.Api.Main.Controllers
 {
+    [RoutePrefix("api/airbreak")]
     public class AirBreakController : MyApiController, IDefaultMethods<AirBreak>
     {
         private IBreakRepository _breakRepository;
