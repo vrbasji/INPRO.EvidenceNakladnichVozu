@@ -35,7 +35,7 @@ namespace Data.Repositories
 
         public List<ChangeHistory> GetChangeHistories(int carId, int skip, int count)
         {
-            return _dbContext.ChangeHistories.Where(x => x.Car.CarId == carId).OrderBy(x => x.ChangeHistoryId).Skip(skip).Take(count).ToList();
+            return _dbContext.ChangeHistories.Where(x => x.Car.CarId == carId).OrderBy(x => x.ChangeDate).Skip(skip).Take(count).ToList();
         }
     }
 }

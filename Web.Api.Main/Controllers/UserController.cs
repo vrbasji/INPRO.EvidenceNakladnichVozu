@@ -15,37 +15,33 @@ namespace Web.Api.Main.Controllers
         {
             _userRepository = userRepository;
         }
-        [Route]
+        [HttpPost]
         public int Add(User data)
         {
             return _userRepository.AddUser(data);
         }
-        [Route]
-        [HttpPut]
-        public void Edit(User data)
+
+        public void Edit(int id, User data)
         {
+            data.UserId = id;
             _userRepository.EditUser(data);
         }
 
-        [Route("{id}")]
         public User Get(int id)
         {
             return _userRepository.GetUser(id);
         }
 
-        [Route("{id}")]
         public void Delete(int id)
         {
             _userRepository.DeleteUser(id);
         }
 
-        [Route("{skip}/{count}")]
         public List<User> Get(int skip, int count)
         {
             return _userRepository.GetForPages(skip, count);
         }
 
-        [Route("{query}")]
         public List<User> Get(string query)
         {
             return _userRepository.FindUsers(query);

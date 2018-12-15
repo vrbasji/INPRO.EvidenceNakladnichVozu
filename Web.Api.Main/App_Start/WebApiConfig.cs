@@ -51,7 +51,7 @@ namespace Web.Api.Main
             container.RegisterType<CarController>(new InjectionConstructor(auth, carRepository, carHistoryRepository));
             container.RegisterType<SerieController>(new InjectionConstructor(auth, serieRepository));
             container.RegisterType<SubjectController>(new InjectionConstructor(auth, subjectRepository));
-            container.RegisterType<BreakController>(new InjectionConstructor(auth, breakRepository));
+            container.RegisterType<HandBreakController>(new InjectionConstructor(auth, breakRepository));
 
             config.DependencyResolver = new UnityDependencyResolver(container);
 
@@ -65,10 +65,19 @@ namespace Web.Api.Main
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "QueryApi",
+                routeTemplate: "api/{controller}/find/{query}"
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}/{id}",
+                routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            config.Routes.MapHttpRoute(
+                name: "ListApi",
+                routeTemplate: "api/{controller}/{skip}/{count}"
+                );
         }
     }
 }

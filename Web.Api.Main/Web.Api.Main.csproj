@@ -220,7 +220,8 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\BreakController.cs" />
+    <Compile Include="Controllers\AirBreakController.cs" />
+    <Compile Include="Controllers\HandBreakController.cs" />
     <Compile Include="Controllers\IDefaultMethods.cs" />
     <Compile Include="Controllers\MyApiController.cs" />
     <Compile Include="Controllers\CarController.cs" />
@@ -251,6 +252,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\AirBreak\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data.Database\Data.Database.csproj">

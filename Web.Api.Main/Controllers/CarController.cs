@@ -17,41 +17,38 @@ namespace Web.Api.Main.Controllers
             _carRepository = carRepository;
             _carHistoryRepository = carHistoryRepository;
         }
-        [Route]
+        [HttpPost]
         public int Add(Car data)
         {
             return _carRepository.AddCar(data);
         }
-        [Route]
-        [HttpPut]
-        public void Edit(Car data)
+
+        public void Edit(int id, Car data)
         {
+            data.CarId = id;
             _carRepository.EditCar(data);
         }
 
-        [Route("{id}")]
         public Car Get(int id)
         {
             return _carRepository.GetById(id);
         }
 
-        [Route("{id}")]
         public void Delete(int id)
         {
             _carRepository.DeleteCar(id);
         }
 
-        [Route("{skip}/{count}")]
         public List<Car> Get(int skip, int count)
         {
             return _carRepository.GetForPages(skip, count);
         }
-        [Route("search/{query}")]
+
         public List<Car> Get(string query)
         {
             return _carRepository.FindCars(query);
         }
-        [Route("{id}/history/{skip}/{count}")]
+
         public List<ChangeHistory> GetHistory(int id, int skip, int count)
         {
             return _carHistoryRepository.GetChangeHistories(id, skip, count);

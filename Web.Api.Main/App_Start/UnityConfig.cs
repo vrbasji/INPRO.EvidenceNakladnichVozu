@@ -40,7 +40,7 @@ namespace Web.Api.Main
             container.RegisterType<CarController>(new InjectionConstructor(auth, carRepository));
             container.RegisterType<SerieController>(new InjectionConstructor(auth, serieRepository));
             container.RegisterType<SubjectController>(new InjectionConstructor(auth, subjectRepository));
-            container.RegisterType<BreakController>(new InjectionConstructor(auth, breakRepository));
+            container.RegisterType<HandBreakController>(new InjectionConstructor(auth, breakRepository));
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

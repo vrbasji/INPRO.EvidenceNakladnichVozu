@@ -15,37 +15,33 @@ namespace Web.Api.Main.Controllers
         {
             _serieRepository = serieRepository;
         }
-        [Route]
+        [HttpPost]
         public int Add(Serie data)
         {
             return _serieRepository.AddSerie(data);
         }
-        [Route]
-        [HttpPut]
-        public void Edit(Serie data)
+
+        public void Edit(int id, Serie data)
         {
+            data.SerieId = id;
             _serieRepository.EditSerie(data);
         }
 
-        [Route("{id}")]
         public Serie Get(int id)
         {
             return _serieRepository.GetSerie(id);
         }
 
-        [Route("{id}")]
         public void Delete(int id)
         {
             _serieRepository.DeleteSerie(id);
         }
 
-        [Route("{skip}/{count}")]
         public List<Serie> Get(int skip, int count)
         {
             return _serieRepository.GetForPages(skip, count);
         }
 
-        [Route("{query}")]
         public List<Serie> Get(string query)
         {
             return _serieRepository.FindSeries(query);
