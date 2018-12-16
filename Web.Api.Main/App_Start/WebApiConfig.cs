@@ -38,6 +38,10 @@ namespace Web.Api.Main
             container.RegisterType<IBreakRepository, BreakRepository>();
             container.RegisterType<CarHistoryService>();
             container.RegisterType<ICarHistoryRepository, CarHistoryRepository>();
+            container.RegisterType<IRevisionRepository, RevisionRepository>();
+            container.RegisterType<IRepairRepository, RepairRepository>();
+            container.RegisterType<IRentRepository, RentRepository>();
+            container.RegisterType<IFaultRepository, FaultRepository>();
             // Controllers
             var auth = new ResolvedParameter<IAuth>();
             var userRepository = new ResolvedParameter<UserRepository>();
@@ -46,6 +50,10 @@ namespace Web.Api.Main
             var subjectRepository = new ResolvedParameter<SubjectRepository>();
             var breakRepository = new ResolvedParameter<BreakRepository>();
             var carHistoryRepository = new ResolvedParameter<CarHistoryRepository>();
+            var revisionRepository = new ResolvedParameter<CarHistoryRepository>();
+            var repairRepository = new ResolvedParameter<CarHistoryRepository>();
+            var rentRepository = new ResolvedParameter<CarHistoryRepository>();
+            var faultRepository = new ResolvedParameter<CarHistoryRepository>();
             container.RegisterType<MyApiController>(new InjectionConstructor(auth));
             container.RegisterType<UserController>(new InjectionConstructor(auth, userRepository));
             container.RegisterType<CarController>(new InjectionConstructor(auth, carRepository, carHistoryRepository));
@@ -53,6 +61,10 @@ namespace Web.Api.Main
             container.RegisterType<SubjectController>(new InjectionConstructor(auth, subjectRepository));
             container.RegisterType<HandBreakController>(new InjectionConstructor(auth, breakRepository));
             container.RegisterType<AirBreakController>(new InjectionConstructor(auth, breakRepository));
+            container.RegisterType<FaultController>(new InjectionConstructor(auth, faultRepository));
+            container.RegisterType<RentController>(new InjectionConstructor(auth, rentRepository));
+            container.RegisterType<RepairController>(new InjectionConstructor(auth, repairRepository));
+            container.RegisterType<RevisionController>(new InjectionConstructor(auth, revisionRepository));
 
             config.DependencyResolver = new UnityDependencyResolver(container);
 
