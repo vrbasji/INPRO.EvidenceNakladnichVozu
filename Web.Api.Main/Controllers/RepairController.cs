@@ -45,7 +45,7 @@ namespace Web.Api.Main.Controllers
             return _repository.GetForPages(skip, count);
         }
         [HttpGet]
-        [Route("{id}/repair")]
+        [Route("{id}/repairs")]
         public List<Repair> GetCarRepairs(int id)
         {
             return _repository.GetCarRepair(id);

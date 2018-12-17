@@ -14,8 +14,6 @@ namespace Data
         public DateTime LastRevisionDate { get; set; }
         public string Description { get; set; }
 
-        [JsonIgnore]
-        [IgnoreDataMember]
         public virtual Car Car { get; set; }
     }
 }

@@ -78,6 +78,11 @@ namespace Web.Api.Main
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "FaultsApi",
+                routeTemplate: "api/{controller}/carfaults/{id}"
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "QueryApi",
                 routeTemplate: "api/{controller}/find/{query}"
             );
