@@ -40,13 +40,13 @@ namespace Web.Api.Main.Controllers
             return _repository.GetById(id);
         }
         [HttpPost]
-        [Route("rent_to")]
+        [Route("rentto")]
         public Rent MakeRent([FromBody]Rent rent)
         {
             return _repository.MakeRent(rent);
         }
         [HttpPost]
-        [Route("rent_from")]
+        [Route("rentfrom")]
         public Rent GetRent([FromBody]Rent rent)
         {
             return _repository.GetRent(rent);
