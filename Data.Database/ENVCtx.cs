@@ -23,6 +23,7 @@ namespace Data.Database
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<HandBreak> HandBreaks { get; set; }
         public DbSet<AirBreak> AirBreaks { get; set; }
+        public DbSet<GoodGroup> GoodGroups { get; set; }
 
         public ENVCtx():base(nameOrConnectionString:"EvidenceNakladnichVozuConStr")
         {

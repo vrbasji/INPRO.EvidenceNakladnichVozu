@@ -98,6 +98,10 @@
     <Compile Include="Migrations\201812051803303_identity.Designer.cs">
       <DependentUpon>201812051803303_identity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812180649097_goodgroup.cs" />
+    <Compile Include="Migrations\201812180649097_goodgroup.Designer.cs">
+      <DependentUpon>201812180649097_goodgroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -139,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812051803303_identity.resx">
       <DependentUpon>201812051803303_identity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812180649097_goodgroup.resx">
+      <DependentUpon>201812180649097_goodgroup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -42,6 +42,7 @@ namespace Web.Api.Main
             container.RegisterType<IRepairRepository, RepairRepository>();
             container.RegisterType<IRentRepository, RentRepository>();
             container.RegisterType<IFaultRepository, FaultRepository>();
+            container.RegisterType<IGoodGroupRepository, GoodGroupRepository>();
             // Controllers
             var auth = new ResolvedParameter<IAuth>();
             var userRepository = new ResolvedParameter<UserRepository>();
@@ -54,6 +55,7 @@ namespace Web.Api.Main
             var repairRepository = new ResolvedParameter<RepairRepository>();
             var rentRepository = new ResolvedParameter<RentRepository>();
             var faultRepository = new ResolvedParameter<FaultRepository>();
+            var goodGroupRepository = new ResolvedParameter<GoodGroupRepository>();
             container.RegisterType<MyApiController>(new InjectionConstructor(auth));
             container.RegisterType<UserController>(new InjectionConstructor(auth, userRepository));
             container.RegisterType<CarController>(new InjectionConstructor(auth, carRepository, carHistoryRepository));
@@ -65,6 +67,7 @@ namespace Web.Api.Main
             container.RegisterType<RentController>(new InjectionConstructor(auth, rentRepository));
             container.RegisterType<RepairController>(new InjectionConstructor(auth, repairRepository));
             container.RegisterType<RevisionController>(new InjectionConstructor(auth, revisionRepository));
+            container.RegisterType<GoodGroupController>(new InjectionConstructor(auth, goodGroupRepository));
 
             config.DependencyResolver = new UnityDependencyResolver(container);
 

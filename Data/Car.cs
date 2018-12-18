@@ -19,8 +19,8 @@ namespace Data
         public DateTime LastZTL { get; set; }
         public bool Certification { get; set; }
         public State State { get; set; }
-        public GoodGroup GoodGroup { get; set; }
 
+        public virtual GoodGroup GoodGroup { get; set; }
         public virtual Serie Serie { get; set; }
         public virtual Subject ServiceResponsiblePerson { get; set; }
         public virtual Subject Owner { get; set; }

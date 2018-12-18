@@ -50,6 +50,7 @@
     <Compile Include="ChangeHistory.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Fault.cs" />
+    <Compile Include="GoodGroup.cs" />
     <Compile Include="HandBreak.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rent.cs" />

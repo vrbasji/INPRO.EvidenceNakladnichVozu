@@ -108,11 +108,13 @@
     <Compile Include="CarHistoryService.cs" />
     <Compile Include="CarRepository.cs" />
     <Compile Include="FaultRepository.cs" />
+    <Compile Include="GoodGroupRepository.cs" />
     <Compile Include="Helpers\SerializationHelper.cs" />
     <Compile Include="Interfaces\IBreakRepository.cs" />
     <Compile Include="Interfaces\ICarHistoryRepository.cs" />
     <Compile Include="Interfaces\ICarRepository.cs" />
     <Compile Include="Interfaces\IFaultRepository.cs" />
+    <Compile Include="Interfaces\IGoodGroupRepository.cs" />
     <Compile Include="Interfaces\IRentRepository.cs" />
     <Compile Include="Interfaces\IRepairRepository.cs" />
     <Compile Include="Interfaces\IRevisionRepository.cs" />

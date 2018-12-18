@@ -222,6 +222,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AirBreakController.cs" />
     <Compile Include="Controllers\FaultController.cs" />
+    <Compile Include="Controllers\GoodGroupController.cs" />
     <Compile Include="Controllers\HandBreakController.cs" />
     <Compile Include="Controllers\IDefaultMethods.cs" />
     <Compile Include="Controllers\MyApiController.cs" />
