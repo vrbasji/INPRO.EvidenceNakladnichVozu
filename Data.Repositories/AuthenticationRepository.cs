@@ -21,7 +21,7 @@ namespace Data.Repositories
         {
             var user = _dbContext.Users.FirstOrDefault(x => x.Email == username && x.Password == password);
             if (user == null) return null;
-            if(user.TokenValidTo < DateTime.Now)
+            if(user.TokenValidTo > DateTime.Now)
             {
                 return user;
             }
