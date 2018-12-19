@@ -54,7 +54,8 @@ namespace Web.Api.Main.Controllers
         {
             return _carRepository.FindCars(query);
         }
-
+        [HttpGet]
+        [Route("{id}/history/{skip}/{count}")]
         public List<ChangeHistory> GetHistory(int id, int skip, int count)
         {
             return _carHistoryRepository.GetChangeHistories(id, skip, count);

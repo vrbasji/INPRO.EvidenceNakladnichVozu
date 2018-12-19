@@ -62,7 +62,7 @@ namespace Web.Api.Main
             var rentRepository = new ResolvedParameter<RentRepository>();
             var faultRepository = new ResolvedParameter<FaultRepository>();
             var goodGroupRepository = new ResolvedParameter<GoodGroupRepository>();
-            
+
             container.RegisterType<MyApiController>(new InjectionConstructor(auth));
             container.RegisterType<UserController>(new InjectionConstructor(auth, userRepository));
             container.RegisterType<CarController>(new InjectionConstructor(auth, carRepository, carHistoryRepository));
@@ -105,6 +105,11 @@ namespace Web.Api.Main
                 name: "QueryApi",
                 routeTemplate: "api/{controller}/find/{query}"
             );
+
+            config.Routes.MapHttpRoute(
+    name: "HistoryApi",
+    routeTemplate: "api/{controller}/{id}/history/{skip}/{count}"
+);
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

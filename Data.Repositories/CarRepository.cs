@@ -39,6 +39,12 @@ namespace Data.Repositories
                     if (resp == null) resp = car.ServiceResponsiblePerson;
                     car.ServiceResponsiblePerson = resp;
                 }
+                if (car.GoodGroup != null)
+                {
+                    var goodGroup = _dbContext.GoodGroups.FirstOrDefault(x => x.GoodGroupId == car.GoodGroup.GoodGroupId);
+                    if (goodGroup == null) goodGroup = car.GoodGroup;
+                    car.GoodGroup = goodGroup;
+                }
                 car.State = State.New;
                 _dbContext.Cars.Add(car);
                 _dbContext.SaveChanges();
@@ -80,7 +86,6 @@ namespace Data.Repositories
                 ed.Certification = car.Certification;
                 ed.ChangeHistories = car.ChangeHistories;
                 ed.Faults = car.Faults;
-                ed.GoodGroup = car.GoodGroup;
                 ed.LastRevision = car.LastRevision;
                 ed.LastZTE = car.LastZTE;
                 ed.LastZTL = car.LastZTL;
@@ -90,6 +95,13 @@ namespace Data.Repositories
                 ed.State = car.State;
                 ed.HandBreakWeight = car.HandBreakWeight;
                 ed.AirBreakWeight = car.AirBreakWeight;
+
+                if(car.GoodGroup != null)
+                {
+                    var goodGroup = _dbContext.GoodGroups.FirstOrDefault(x => x.GoodGroupId == car.GoodGroup.GoodGroupId);
+                    if (goodGroup == null) goodGroup = car.GoodGroup;
+                    ed.GoodGroup = goodGroup;
+                }
 
                 if (car.Serie != null)
                 {
@@ -134,11 +146,11 @@ namespace Data.Repositories
         {
             if (int.TryParse(query, out int result))
             {
-                return _dbContext.Cars.Where(x => x.RevisionPeriod == result).ToList();
+                return _dbContext.Cars.Where(x => x.RevisionPeriod == result || x.Name.Contains(query)).ToList();
             }
             if (DateTime.TryParse(query, out DateTime resultDate))
             {
-                return _dbContext.Cars.Where(x => x.LastRevision == resultDate || x.LastZTE == resultDate || x.LastZTL == resultDate).ToList();
+                return _dbContext.Cars.Where(x => x.LastRevision == resultDate || x.LastZTE == resultDate || x.LastZTL == resultDate || x.Name.Contains(query)).ToList();
             }
 
             return _dbContext.Cars.Where(x => x.Name.Contains(query)).ToList();
@@ -146,7 +158,7 @@ namespace Data.Repositories
 
         public List<Car> GetAll()
         {
-            return _dbContext.Cars.Where(x => x.State == State.New).ToList();
+            return _dbContext.Cars.ToList();
         }
 
         public List<Serie> GetAllSeries(int start, int end)
