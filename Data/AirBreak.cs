@@ -10,6 +10,5 @@ namespace Data
     {
         public int AirBreakId { get; set; }
         public string Name { get; set; }
-        public int AirBreakWeight { get; set; }
     }
 }

@@ -68,7 +68,6 @@ namespace Data.Repositories
                 throw new Exception("Brake with id " + airBrake.AirBreakId + " was not found.");
             if (ed != null)
             {
-                ed.AirBreakWeight = airBrake.AirBreakWeight;
                 ed.Name = airBrake.Name;
                 _dbContext.SaveChanges();
             }
@@ -81,7 +80,6 @@ namespace Data.Repositories
                 throw new Exception("Brake with id " + handBreak.HandBreakId + " was not found.");
             if (ed != null)
             {
-                ed.HandBreakWeight = handBreak.HandBreakWeight;
                 ed.Name = handBreak.Name;
                 _dbContext.SaveChanges();
             }
@@ -89,34 +87,16 @@ namespace Data.Repositories
 
         public List<AirBreak> FindAirBreak(string query)
         {
-            if (int.TryParse(query, out int result))
-            {
-                return _dbContext.AirBreaks
-                    .Where(x => x.Name.Contains(query) || x.AirBreakWeight == result)
-                    .ToList();
-            }
-            else
-            {
-                return _dbContext.AirBreaks
-                    .Where(x => x.Name.Contains(query))
-                    .ToList();
-            }
+            return _dbContext.AirBreaks
+                                .Where(x => x.Name.Contains(query))
+                                .ToList();
         }
 
         public List<HandBreak> FindHandBreaks(string query)
         {
-            if (int.TryParse(query, out int result))
-            {
-                return _dbContext.HandBreaks
-                    .Where(x => x.Name.Contains(query) || x.HandBreakWeight == result)
-                    .ToList();
-            }
-            else
-            {
-                return _dbContext.HandBreaks
+            return _dbContext.HandBreaks
                     .Where(x => x.Name.Contains(query))
                     .ToList();
-            }
         }
 
         public AirBreak GetAirBreak(int airBrakeId)

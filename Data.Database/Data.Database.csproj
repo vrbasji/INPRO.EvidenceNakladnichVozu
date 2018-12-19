@@ -110,6 +110,10 @@
     <Compile Include="Migrations\201812191322478_nullablepolozky.Designer.cs">
       <DependentUpon>201812191322478_nullablepolozky.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812191645049_prace_s_brzdami.cs" />
+    <Compile Include="Migrations\201812191645049_prace_s_brzdami.Designer.cs">
+      <DependentUpon>201812191645049_prace_s_brzdami.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -160,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812191322478_nullablepolozky.resx">
       <DependentUpon>201812191322478_nullablepolozky.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812191645049_prace_s_brzdami.resx">
+      <DependentUpon>201812191645049_prace_s_brzdami.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

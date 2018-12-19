@@ -10,6 +10,5 @@ namespace Data
     {
         public int HandBreakId { get; set; }
         public string Name { get; set; }
-        public int HandBreakWeight { get; set; }
     }
 }
