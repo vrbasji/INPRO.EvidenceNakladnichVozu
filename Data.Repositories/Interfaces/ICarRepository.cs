@@ -29,5 +29,7 @@ namespace Data.Repositories.Interfaces
         Fault AddFaultToCar(Fault fault, int carId);
 
         List<Car> FindCars(string query);
+
+        List<Car> GetDashboard();
     }
 }

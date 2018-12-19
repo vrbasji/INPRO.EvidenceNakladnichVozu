@@ -164,6 +164,11 @@ namespace Data.Repositories
                 .ToList();
         }
 
+        public List<Car> GetDashboard()
+        {
+            return _dbContext.Cars.OrderBy(x => x.LastRevision.Value).ThenBy(x=>x.RevisionPeriod).Take(10).ToList();
+        }
+
         public List<Car> GetForPages(int start, int end)
         {
             return GetAll().OrderBy(x => x.CarId).Skip(start).Take(end).ToList();

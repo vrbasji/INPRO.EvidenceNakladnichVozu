@@ -43,6 +43,12 @@ namespace Web.Api.Main.Controllers
         {
             return _carRepository.GetForPages(skip, count);
         }
+        [Route("dashboard")]
+        [HttpGet]
+        public List<Car> GetDashboard()
+        {
+            return _carRepository.GetDashboard();
+        }
 
         public List<Car> Get(string query)
         {

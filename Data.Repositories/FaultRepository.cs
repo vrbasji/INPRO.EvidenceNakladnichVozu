@@ -85,6 +85,11 @@ namespace Data.Repositories
             return _dbContext.Faults.Where(x => x.Car.CarId == carId).OrderBy(x=>x.FoundedDate).ToList();
         }
 
+        public List<Fault> GetDashboard()
+        {
+            return _dbContext.Faults.Where(x => x.Repairs.Count == 0).OrderBy(x => x.FoundedDate).Take(10).ToList();
+        }
+
         public List<Fault> GetForPages(int start, int end)
         {
             return _dbContext.Faults.OrderBy(x => x.FaultId).Skip(start).Take(end).ToList();

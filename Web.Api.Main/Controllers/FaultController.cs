@@ -24,6 +24,13 @@ namespace Web.Api.Main.Controllers
             return _repository.AddFault(data);
         }
 
+        [Route("dashboard")]
+        [HttpGet]
+        public List<Fault> GetDashboard()
+        {
+            return _repository.GetDashboard();
+        }
+
         public void Delete(int id)
         {
             _repository.DeleteFault(id);

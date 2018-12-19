@@ -19,5 +19,7 @@ namespace Data.Repositories.Interfaces
         Fault DeleteFault(int id);
 
         List<Fault> GetForPages(int start, int end);
+
+        List<Fault> GetDashboard();
     }
 }
