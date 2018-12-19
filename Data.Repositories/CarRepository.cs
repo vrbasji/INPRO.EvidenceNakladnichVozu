@@ -88,6 +88,8 @@ namespace Data.Repositories
                 ed.RevisionPeriod = car.RevisionPeriod;
                 ed.Revisions = car.Revisions;
                 ed.State = car.State;
+                ed.HandBreakWeight = car.HandBreakWeight;
+                ed.AirBreakWeight = car.AirBreakWeight;
 
                 if (car.Serie != null)
                 {

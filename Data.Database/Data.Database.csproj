@@ -114,6 +114,10 @@
     <Compile Include="Migrations\201812191645049_prace_s_brzdami.Designer.cs">
       <DependentUpon>201812191645049_prace_s_brzdami.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812191913307_prace_s_brzdami_oprava.cs" />
+    <Compile Include="Migrations\201812191913307_prace_s_brzdami_oprava.Designer.cs">
+      <DependentUpon>201812191913307_prace_s_brzdami_oprava.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -167,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812191645049_prace_s_brzdami.resx">
       <DependentUpon>201812191645049_prace_s_brzdami.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812191913307_prace_s_brzdami_oprava.resx">
+      <DependentUpon>201812191913307_prace_s_brzdami_oprava.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

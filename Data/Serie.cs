@@ -23,8 +23,6 @@ namespace Data
         public float AreaHeight { get; set; }
         public int NumberOfGear { get; set; }
         public int NumberOfPars { get; set; }
-        public int AirBreakWeight { get; set; }
-        public int HandBreakWeight { get; set; }
 
         public virtual AirBreak AirBreak { get; set; }
         public virtual HandBreak HandBreak { get; set; }

@@ -78,6 +78,14 @@ namespace Data.Repositories
             {
                 changes.Add(new Change("State", before.State, actual.State));
             }
+            if (before.HandBreakWeight != actual.HandBreakWeight)
+            {
+                changes.Add(new Change("HandBreakWeight", before.HandBreakWeight, actual.HandBreakWeight));
+            }
+            if (before.AirBreakWeight != actual.AirBreakWeight)
+            {
+                changes.Add(new Change("AirBreakWeight", before.AirBreakWeight, actual.AirBreakWeight));
+            }
             if (before.Faults != actual.Faults && before.Faults != null && actual.Faults != null)
             {
                 var changed = before.Faults.Except(actual.Faults);

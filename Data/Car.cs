@@ -19,6 +19,8 @@ namespace Data
         public DateTime? LastZTL { get; set; }
         public bool Certification { get; set; }
         public State State { get; set; }
+        public int AirBreakWeight { get; set; }
+        public int HandBreakWeight { get; set; }
 
         public virtual GoodGroup GoodGroup { get; set; }
         public virtual Serie Serie { get; set; }
