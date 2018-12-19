@@ -70,7 +70,7 @@ namespace Data.Repositories
             if(int.TryParse(query, out int intResult))
             {
                 return _dbContext.Series
-                    .Where(x => x.Area == intResult || x.BumpersLenght == intResult || 
+                    .Where(x => x.Area == intResult || x.BumpersLenght == intResult || x.MaxSpeed == intResult ||
                     x.Lenght == intResult || x.NumberOfAxle == intResult || 
                     x.NumberOfGear == intResult || x.NumberOfPars == intResult)
                     .ToList();
