@@ -8,7 +8,7 @@ namespace Data.Repositories.Interfaces
 {
     public interface IAuthenticationRepository
     {
-        string Authenticate(string username, string password);
+        User Authenticate(string username, string password);
 
         bool IsAuthenitcated(string token);
     }

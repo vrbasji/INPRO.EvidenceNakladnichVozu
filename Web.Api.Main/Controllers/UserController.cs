@@ -18,7 +18,7 @@ namespace Web.Api.Main.Controllers
         }
         [HttpPost]
         [Route("login")]
-        public string Login(UserLogin data)
+        public LoginResponseModel Login(UserLogin data)
         {
            return _AuthenticationService.Authenticate(data.Email, data.Password);
         }

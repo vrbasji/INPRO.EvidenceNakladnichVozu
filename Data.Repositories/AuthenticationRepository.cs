@@ -17,19 +17,19 @@ namespace Data.Repositories
         {
             _dbContext = dbContext;
         }
-        public string Authenticate(string username, string password)
+        public User Authenticate(string username, string password)
         {
             var user = _dbContext.Users.FirstOrDefault(x => x.Email == username && x.Password == password);
             if (user == null) return null;
             if(user.TokenValidTo < DateTime.Now)
             {
-                return user.Token;
+                return user;
             }
             var token = TokenManager.CreateToken();
             user.Token = token;
             user.TokenValidTo = DateTime.Now.AddHours(10);
             _dbContext.SaveChanges();
-            return token;
+            return user;
         }
 
         public bool IsAuthenitcated(string token)

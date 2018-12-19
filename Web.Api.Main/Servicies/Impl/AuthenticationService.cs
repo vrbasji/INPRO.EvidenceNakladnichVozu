@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Web.Api.Main.Models;
 
 namespace Web.Api.Main.Servicies.Impl
 {
@@ -14,9 +15,15 @@ namespace Web.Api.Main.Servicies.Impl
         {
             _authRep = authRep;
         }
-        public string Authenticate(string username, string password)
+        public LoginResponseModel Authenticate(string username, string password)
         {
-            return _authRep.Authenticate(username, password);
+            var user = _authRep.Authenticate(username, password);
+            if (user == null || user.Role == null) return null;
+            return new LoginResponseModel() {
+                RoleId = user.Role.RoleId,
+                Token = user.Token,
+                UserId = user.UserId
+            };
         }
 
         public bool IsAuthenticated(string token)

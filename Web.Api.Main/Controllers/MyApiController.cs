@@ -18,21 +18,5 @@ namespace Web.Api.Main.Controllers
         {
             _AuthenticationService = iauth;
         }
-
-        //protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        //{
-        //    //var cookies = filterContext.HttpContext.Request.Cookies;
-        //    //if(cookies["token"] == null)
-        //    //{
-        //    //    throw new HttpResponseException(HttpStatusCode.Unauthorized);
-        //    //}
-        //    //var token = cookies["token"].Value;
-        //    //if (!_AuthenticationService.IsAuthenticated(token))
-        //    //{
-        //    //    throw new HttpResponseException(HttpStatusCode.Unauthorized);
-        //    //}
-
-        //    base.OnActionExecuting(filterContext);
-        //}
     }
 }

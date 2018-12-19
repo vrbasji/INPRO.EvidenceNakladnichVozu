@@ -1,10 +1,11 @@
 ﻿using Data;
+using Web.Api.Main.Models;
 
 namespace Web.Api.Main.Servicies
 {
     public interface IAuth
     {
         bool IsAuthenticated(string token);
-        string Authenticate(string username, string password);
+        LoginResponseModel Authenticate(string username, string password);
     }
 }
