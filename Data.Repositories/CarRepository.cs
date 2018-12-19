@@ -75,6 +75,8 @@ namespace Data.Repositories
             var ed = _dbContext.Cars.FirstOrDefault(x => x.CarId == car.CarId);
             if (ed != null)
             {
+                var carBefore = new Car(ed.Name, ed.LastRevision, ed.RevisionPeriod, ed.LastZTE, ed.LastZTL, ed.Certification, ed.State,
+                    ed.GoodGroup, ed.Serie, ed.ServiceResponsiblePerson, ed.Owner);
                 ed.Certification = car.Certification;
                 ed.ChangeHistories = car.ChangeHistories;
                 ed.Faults = car.Faults;
@@ -99,14 +101,14 @@ namespace Data.Repositories
                     if (owner == null) owner = car.Owner;
                     ed.Owner = owner;
                 }
-                if(car.ServiceResponsiblePerson != null)
+                if (car.ServiceResponsiblePerson != null)
                 {
                     var resp = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == car.ServiceResponsiblePerson.SubjectId);
                     if (resp == null) resp = car.ServiceResponsiblePerson;
                     ed.ServiceResponsiblePerson = resp;
                 }
 
-                _historyService.SaveHistory(car, ed);
+                _historyService.SaveHistory(carBefore, ed, _dbContext);
                 _dbContext.SaveChanges();
             }
             return ed;

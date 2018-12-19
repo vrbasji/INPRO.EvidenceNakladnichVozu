@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Data.Database;
+using System.Collections.Generic;
 
 namespace Data.Repositories.Interfaces
 {
@@ -7,6 +8,6 @@ namespace Data.Repositories.Interfaces
         List<ChangeHistory> GetChangeHistories(int carId, int skip, int count);
 
         void AddChangeHistory(ChangeHistory history);
-        void AddChangeHistories(List<ChangeHistory> histories);
+        void AddChangeHistories(List<ChangeHistory> histories, ENVCtx ctx);
     }
 }

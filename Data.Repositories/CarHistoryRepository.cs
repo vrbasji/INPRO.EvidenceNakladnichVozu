@@ -15,10 +15,10 @@ namespace Data.Repositories
             _dbContext = dbContext;
         }
 
-        public void AddChangeHistories(List<ChangeHistory> histories)
+        public void AddChangeHistories(List<ChangeHistory> histories, ENVCtx ctx)
         {
-            _dbContext.ChangeHistories.AddRange(histories);
-            _dbContext.SaveChanges();
+            ctx.ChangeHistories.AddRange(histories);
+            ctx.SaveChanges();
         }
 
         public void AddChangeHistory(ChangeHistory history)

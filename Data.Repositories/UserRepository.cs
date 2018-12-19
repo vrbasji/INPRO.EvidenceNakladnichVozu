@@ -26,7 +26,7 @@ namespace Data.Repositories
                 _dbContext.SaveChanges();
                 return user.UserId;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return -1;
             }

@@ -106,6 +106,10 @@
     <Compile Include="Migrations\201812190929065_authentication.Designer.cs">
       <DependentUpon>201812190929065_authentication.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812191322478_nullablepolozky.cs" />
+    <Compile Include="Migrations\201812191322478_nullablepolozky.Designer.cs">
+      <DependentUpon>201812191322478_nullablepolozky.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -153,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812190929065_authentication.resx">
       <DependentUpon>201812190929065_authentication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812191322478_nullablepolozky.resx">
+      <DependentUpon>201812191322478_nullablepolozky.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

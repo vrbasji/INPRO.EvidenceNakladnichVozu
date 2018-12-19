@@ -13,10 +13,10 @@ namespace Data
     {
         public int CarId { get; set; }
         public string Name { get; set; }
-        public DateTime LastRevision { get; set; }
+        public DateTime? LastRevision { get; set; }
         public int RevisionPeriod { get; set; }
-        public DateTime LastZTE { get; set; }
-        public DateTime LastZTL { get; set; }
+        public DateTime? LastZTE { get; set; }
+        public DateTime? LastZTL { get; set; }
         public bool Certification { get; set; }
         public State State { get; set; }
 
@@ -34,5 +34,26 @@ namespace Data
         [JsonIgnore]
         [IgnoreDataMember]
         public virtual ICollection<ChangeHistory> ChangeHistories { get; set; }
+
+        public Car()
+        {
+
+        }
+
+        public Car(string name, DateTime? lastRevision, int revisionPeriod, DateTime? lastZTE, DateTime? lastZTL, bool certification
+            , State state, GoodGroup goodGroup, Serie serie, Subject serviceResponsiblePerson, Subject owner)
+        {
+            Name = name;
+            LastRevision = lastRevision;
+            RevisionPeriod = revisionPeriod;
+            LastZTE = lastZTE;
+            LastZTL = lastZTL;
+            Certification = certification;
+            State = state;
+            GoodGroup = goodGroup;
+            Serie = serie;
+            ServiceResponsiblePerson = serviceResponsiblePerson;
+            Owner =owner;
+        }
     }
 }

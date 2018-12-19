@@ -1,4 +1,5 @@
 ﻿using Data;
+using Data.Database;
 using Data.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Data.Repositories
         {
             _carHistoryRepository = carHistoryRepository;
         }
-        public void SaveHistory(Car before, Car actual)
+        public void SaveHistory(Car before, Car actual, ENVCtx ctx)
         {
             //foreach (var change in GetChanges(before,actual))
             //{
@@ -39,7 +40,7 @@ namespace Data.Repositories
                         OldValue = x.BeforeValue
                     }
                     ).ToList()
-                );
+                , ctx);
         }
 
         private List<Change> GetChanges(Car before, Car actual)
@@ -49,9 +50,9 @@ namespace Data.Repositories
             {
                 changes.Add(new Change("Certification", before.Certification, actual.Certification));
             }
-            if (before.GoodGroup != actual.GoodGroup)
+            if (before.GoodGroup.Name != actual.GoodGroup.Name)
             {
-                changes.Add(new Change("GoodGroup", before.GoodGroup, actual.GoodGroup));
+                changes.Add(new Change("GoodGroup", before.GoodGroup.Name, actual.GoodGroup.Name));
             }
             if (before.LastRevision != actual.LastRevision)
             {
