@@ -17,5 +17,7 @@ namespace Data.Repositories.Interfaces
         Rent GetRent(int carId, int subjectId, DateTime dueDay);
 
         List<Rent> GetForPages(int start, int end);
+
+        List<Rent> GetDashboard();
     }
 }

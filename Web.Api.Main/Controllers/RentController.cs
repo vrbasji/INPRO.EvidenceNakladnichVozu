@@ -26,6 +26,13 @@ namespace Web.Api.Main.Controllers
             throw new NotImplementedException();
         }
 
+        [Route("dashboard")]
+        [HttpGet]
+        public List<Rent> GetDashboard()
+        {
+            return _repository.GetDashboard();
+        }
+
         public void Delete(int id)
         {
             throw new NotImplementedException();

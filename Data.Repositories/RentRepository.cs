@@ -69,5 +69,10 @@ namespace Data.Repositories
         {
             return _dbContext.Rents.Where(x => x.Subject.SubjectId == id).OrderBy(x => x.StartDate).ToList();
         }
+
+        public List<Rent> GetDashboard()
+        {
+            return _dbContext.Rents.OrderBy(x => x.EndDate).Take(10).ToList();
+        }
     }
 }
