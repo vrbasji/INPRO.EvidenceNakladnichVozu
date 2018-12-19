@@ -10,7 +10,7 @@ namespace Web.Api.Main.Controllers
 {
     public class MyApiController : ApiController
     {
-        private IAuth _AuthenticationService;
+        public IAuth _AuthenticationService;
 
         public MyApiController() { }
 

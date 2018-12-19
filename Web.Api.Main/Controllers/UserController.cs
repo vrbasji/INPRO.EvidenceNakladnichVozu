@@ -2,6 +2,7 @@
 using Data.Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Web.Http;
+using Web.Api.Main.Models;
 using Web.Api.Main.Servicies;
 
 namespace Web.Api.Main.Controllers
@@ -15,6 +16,13 @@ namespace Web.Api.Main.Controllers
         {
             _userRepository = userRepository;
         }
+        [HttpPost]
+        [Route("login")]
+        public string Login(UserLogin data)
+        {
+           return _AuthenticationService.Authenticate(data.Email, data.Password);
+        }
+
         [HttpPost]
         public int Add(User data)
         {

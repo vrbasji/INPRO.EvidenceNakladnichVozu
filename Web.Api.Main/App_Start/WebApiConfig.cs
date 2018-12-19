@@ -43,8 +43,14 @@ namespace Web.Api.Main
             container.RegisterType<IRentRepository, RentRepository>();
             container.RegisterType<IFaultRepository, FaultRepository>();
             container.RegisterType<IGoodGroupRepository, GoodGroupRepository>();
+            container.RegisterType<IAuthenticationRepository, AuthenticationRepository>();
+
             // Controllers
             var auth = new ResolvedParameter<IAuth>();
+
+            // overovani
+            container.RegisterType<MyFilter>(new InjectionConstructor(auth));
+            config.Filters.Add(container.Resolve<MyFilter>());
             var userRepository = new ResolvedParameter<UserRepository>();
             var carRepository = new ResolvedParameter<CarRepository>();
             var serieRepository = new ResolvedParameter<SerieRepository>();
@@ -56,6 +62,7 @@ namespace Web.Api.Main
             var rentRepository = new ResolvedParameter<RentRepository>();
             var faultRepository = new ResolvedParameter<FaultRepository>();
             var goodGroupRepository = new ResolvedParameter<GoodGroupRepository>();
+            
             container.RegisterType<MyApiController>(new InjectionConstructor(auth));
             container.RegisterType<UserController>(new InjectionConstructor(auth, userRepository));
             container.RegisterType<CarController>(new InjectionConstructor(auth, carRepository, carHistoryRepository));

@@ -102,6 +102,10 @@
     <Compile Include="Migrations\201812180649097_goodgroup.Designer.cs">
       <DependentUpon>201812180649097_goodgroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812190929065_authentication.cs" />
+    <Compile Include="Migrations\201812190929065_authentication.Designer.cs">
+      <DependentUpon>201812190929065_authentication.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -146,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812180649097_goodgroup.resx">
       <DependentUpon>201812180649097_goodgroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812190929065_authentication.resx">
+      <DependentUpon>201812190929065_authentication.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
