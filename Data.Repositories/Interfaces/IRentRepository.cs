@@ -12,9 +12,9 @@ namespace Data.Repositories.Interfaces
 
         List<Rent> GetRentBySubject(int id);
 
-        Rent MakeRent(Rent rent);
+        Rent MakeRent(int carId, int subjectId, DateTime dueDay);
 
-        Rent GetRent(Rent rent);
+        Rent GetRent(int carId, int subjectId, DateTime dueDay);
 
         List<Rent> GetForPages(int start, int end);
     }

@@ -81,6 +81,15 @@ namespace Web.Api.Main
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "RentsToApi",
+                routeTemplate: "api/rent/rentto"
+            );
+            config.Routes.MapHttpRoute(
+                name: "RentsFromApi",
+                routeTemplate: "api/rent/rentfrom"
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "FaultsApi",
                 routeTemplate: "api/{controller}/carfaults/{id}"
             );

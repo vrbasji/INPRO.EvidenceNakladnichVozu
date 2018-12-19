@@ -26,21 +26,48 @@ namespace Data.Repositories
             return _dbContext.Rents.OrderBy(x => x.RentId).Skip(start).Take(end).ToList();
         }
 
-        public Rent GetRent(Rent rent)
+        public Rent GetRent(int carId, int subjectId, DateTime dueDay)
         {
-            //TODO
-            throw new NotImplementedException();
+            var car = _dbContext.Cars.FirstOrDefault(x => x.CarId == carId);
+            var subject = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == subjectId);
+            if (car == null || subject == null) return null;
+
+            car.State = State.Rented;
+            var rent = new Rent()
+            {
+                Car = car,
+                RentType = RentType.Rented,
+                StartDate = DateTime.Now,
+                Subject = subject,
+                EndDate = dueDay
+            };
+            var retRent = _dbContext.Rents.Add(rent);
+            _dbContext.SaveChanges();
+            return retRent;
+        }
+        public Rent MakeRent(int carId, int subjectId, DateTime dueDay)
+        {
+            var car = _dbContext.Cars.FirstOrDefault(x => x.CarId == carId);
+            var subject = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == subjectId);
+            if (car == null || subject == null) return null;
+
+            car.State = State.InRent;
+            var rent = new Rent()
+            {
+                Car = car,
+                RentType = RentType.Owned,
+                StartDate = DateTime.Now,
+                Subject = subject,
+                EndDate = dueDay
+            };
+            var retRent = _dbContext.Rents.Add(rent);
+            _dbContext.SaveChanges();
+            return retRent;
         }
 
         public List<Rent> GetRentBySubject(int id)
         {
             return _dbContext.Rents.Where(x => x.Subject.SubjectId == id).OrderBy(x => x.StartDate).ToList();
-        }
-
-        public Rent MakeRent(Rent rent)
-        {
-            //TODO
-            throw new NotImplementedException();
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Web.Api.Main.Models;
 using Web.Api.Main.Servicies;
 
 namespace Web.Api.Main.Controllers
@@ -41,15 +42,15 @@ namespace Web.Api.Main.Controllers
         }
         [HttpPost]
         [Route("rentto")]
-        public Rent MakeRent([FromBody]Rent rent)
+        public Rent MakeRent([FromBody] RentModel rent)
         {
-            return _repository.MakeRent(rent);
+            return _repository.MakeRent(rent.CarId, rent.SubjectId, rent.DueDate);
         }
         [HttpPost]
         [Route("rentfrom")]
-        public Rent GetRent([FromBody]Rent rent)
+        public Rent GetRent([FromBody] RentModel rent)
         {
-            return _repository.GetRent(rent);
+            return _repository.GetRent(rent.CarId, rent.SubjectId, rent.DueDate);
         }
         [HttpGet]
         [Route("forsubject/{id}")]
