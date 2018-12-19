@@ -33,6 +33,14 @@ namespace Web.Api.Main.Servicies
             bool authorized = false;
             IEnumerable<string> values;
             actionContext.Request.Headers.TryGetValues("Token", out values);
+            if(values == null)
+            {
+                var response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized);
+                response.Headers.Location = new Uri("https://thomaash.github.io/inpro");
+                actionContext.Response = response;
+                base.OnActionExecuting(actionContext);
+                return;
+            }
             string token = values.FirstOrDefault();
 
             authorized = _authService.IsAuthenticated(token);
