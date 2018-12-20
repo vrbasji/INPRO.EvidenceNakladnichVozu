@@ -180,7 +180,11 @@ namespace Data.Repositories
 
         public List<Car> GetDashboard()
         {
-            return _dbContext.Cars.OrderBy(x => x.LastRevision.Value).ThenBy(x=>x.RevisionPeriod).Take(10).ToList();
+            return _dbContext.Cars.Where(x=>x.State != State.Excluded)
+                .OrderBy(x => x.LastRevision.Value)
+                .ThenBy(x=>x.RevisionPeriod)
+                .Take(10)
+                .ToList();
         }
 
         public List<Car> GetForPages(int start, int end)
